@@ -1,5 +1,6 @@
 package PWS;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -56,7 +57,21 @@ public class RetrieveHistoricalObservation {
         for(int i=0;i<listTS.size();i++){
             System.out.println(listTS.get(i));
             GetObservation RCO = new GetObservation(ApiKey, StationID);
-            JSONArray dailyObservationArray = RCO.getDailyObservation(PWS.DateUtil.getYesterdayDateString("yyyyMMdd"));
+            //JSONArray dailyObservationArray = RCO.getDailyObservation(PWS.DateUtil.getYesterdayDateString("yyyyMMdd"));
+            JSONArray dailyObservationArray = RCO.getDailyObservation(listTS.get(i));
+            try{
+                for (int y = 0; y < dailyObservationArray.length(); y++) {
+                    //DailyObservation observation = RCO.createDailyObservation(dailyObservationArray);
+                    JSONObject obs = dailyObservationArray.getJSONObject(y);
+                    DailyObservation observation = RCO.createDailyObservation(obs);
+                    ObsExporter obsExporter = new ObsExporter(observation,listTS.get(i));
+                    obsExporter.createCSVFile();
+                    System.out.println("Recupero completato per "+ observation.getObsTimeLocal());
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
 
     }

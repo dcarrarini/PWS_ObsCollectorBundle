@@ -1,6 +1,11 @@
 package PWS;
 
+import dbop.MySQLConnector;
+import dbop.MySQLdbopDailyObs;
 import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -38,7 +43,10 @@ public class Main {
 	            System.out.println(dcConn.getClass());
 	           */
 
-    /*
+            //Recupero storico
+            RetrieveHistoricalObservation rho = new RetrieveHistoricalObservation(startDate,endDate,ApiKey,StationID);
+            rho.RetrieveHistoricalObservationFull();
+            System.out.println("Recupero completato");
             //DAILY OBSERVATION
             try {
                 MySQLConnector mySQLConn = new MySQLConnector();
@@ -47,15 +55,16 @@ public class Main {
                     //DailyObservation observation = RCO.createDailyObservation(dailyObservationArray);
                     JSONObject obs = dailyObservationArray.getJSONObject(i);
                     DailyObservation observation = RCO.createDailyObservation(obs);
-                    System.out.println(observation.getStationID());
-                    System.out.println(observation.getObsTimeLocal());
-                    MySQLdbopDailyObs mysqldaily = new MySQLdbopDailyObs(connection, observation);
-                    mysqldaily.addDailyObs();
+                    ObsExporter obsExporter = new ObsExporter(observation,PWS.DateUtil.getYesterdayDateString("yyyyMMdd"));
+                    obsExporter.createCSVFile();
+                   // MySQLdbopDailyObs mysqldaily = new MySQLdbopDailyObs(connection, observation);
+                   // mysqldaily.addDailyObs();
                 }
                 connection.close();
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
+ /*
             //CURRENT OBSERVATION
             try {
                 Observation observation = RCO.createCurrentObservation(currentObservationArray);
