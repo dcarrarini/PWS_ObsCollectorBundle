@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            String ApiKey = "0531e8989b884563b1e8989b88756376";
+            String ApiKey = "5aeeb90c49f249c1aeb90c49f289c138";
             String StationID = "ISANVI15";
             GetObservation RCO = new GetObservation(ApiKey, StationID);
             RCO.setApiKey(ApiKey);
@@ -26,7 +26,7 @@ public class Main {
 
             //get localdate per recupero storico
             LocalDate startDate = LocalDate.parse("2020-03-01");
-            LocalDate endDate = LocalDate.parse("2020-09-27");
+            LocalDate endDate = LocalDate.parse("2020-09-30");
 
             //System.out.println(convertLocalDateToString(startDate));
 
@@ -47,6 +47,7 @@ public class Main {
             RetrieveHistoricalObservation rho = new RetrieveHistoricalObservation(startDate,endDate,ApiKey,StationID);
             rho.RetrieveHistoricalObservationFull();
             System.out.println("Recupero completato");
+            /*
             //DAILY OBSERVATION
             try {
                 MySQLConnector mySQLConn = new MySQLConnector();
@@ -57,13 +58,15 @@ public class Main {
                     DailyObservation observation = RCO.createDailyObservation(obs);
                     ObsExporter obsExporter = new ObsExporter(observation,PWS.DateUtil.getYesterdayDateString("yyyyMMdd"));
                     obsExporter.createCSVFile();
-                   // MySQLdbopDailyObs mysqldaily = new MySQLdbopDailyObs(connection, observation);
-                   // mysqldaily.addDailyObs();
+                    MySQLdbopDailyObs mysqldaily = new MySQLdbopDailyObs(connection, observation);
+                    mysqldaily.addDailyObs();
                 }
                 connection.close();
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
+
+             */
  /*
             //CURRENT OBSERVATION
             try {

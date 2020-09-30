@@ -1,16 +1,12 @@
 package PWS;
-import org.apache.commons.*;
+
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVFormat;
-import org.json.JSONArray;
 
 
 public class ObsExporter {
@@ -40,13 +36,39 @@ public class ObsExporter {
     }
 
     public void createCSVFile() throws IOException {
-        try (
-                FileWriter fw = new FileWriter("C:\\Dropbox\\PWS_DATA\\"+sTS+".csv", true);
+        try{
+        File file = new File("C:\\Dropbox\\PWS_DATA\\" + sTS + ".csv");
+         FileWriter fw = new FileWriter(file, true);
+            //FileWriter fw = new FileWriter("C:\\Dropbox\\PWS_DATA\\" + sTS + ".csv", true);
                 BufferedWriter writer = new BufferedWriter(fw);
-                CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT);
-               // CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
-               //         .withHeader("ID", "Name", "Designation", "Company"));
-        ) {
+                //CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT);
+            CSVPrinter csvPrinter;
+                if (!file.exists()){
+                    csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
+                            .withHeader("StationID",
+                                    "ObsTimeLocal",
+                                    "SolarRadiationHigh",
+                                    "Lon",
+                                    "Lat",
+                                    "UvHigh",
+                                    "WinddirAvg",
+                                    "HumidityAvg",
+                                    "TempAvg",
+                                    "HeatIndexAvg",
+                                    "DewptAvg",
+                                    "WindchillAvg",
+                                    "WindspeedAvg",
+                                    "WindgustAvg",
+                                    "PressureMax",
+                                    "PressureMin",
+                                    "PressureTrend",
+                                    "PrecipRate",
+                                    "PrecipTotal"));
+                }else{
+                    csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT);
+                }
+
+
             csvPrinter.printRecord(obs.getStationID(),
                     obs.getObsTimeLocal(),
                     obs.getSolarRadiationHigh(),
@@ -67,7 +89,8 @@ public class ObsExporter {
                     obs.getPrecipRate(),
                     obs.getPrecipTotal());
             csvPrinter.flush();
-        } catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

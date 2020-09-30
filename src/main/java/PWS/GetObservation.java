@@ -2,9 +2,9 @@ package PWS;
 /**
  * @Applicatio Personal PWS Monitor
  * @author diego carrarini
- * @since 20/09/2020
  * @last 22/09/2020
  * @version 1.10
+ * @since 20/09/2020
  */
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -118,7 +118,7 @@ public class GetObservation {
         JSONArray observation = null;
         try {
             String sURL = "https://api.weather.com/v2/pws/history/all?stationId=" + this.getStationID()
-                    + "&format=json&units=m&date="+sTS+"&apiKey=" + this.getApiKey();
+                    + "&format=json&units=m&date=" + sTS + "&apiKey=" + this.getApiKey();
             URL url = new URL(sURL);
             // Gestione della risposta
             System.out.println(url);
@@ -190,23 +190,110 @@ public class GetObservation {
             stationID = obs.getString("stationID");
             obsTimeUtc = obs.getString("obsTimeUtc");
             obsTimeLocal = alignTS(obs.getString("obsTimeLocal"));
-            solarRadiation = String.valueOf(obs.getDouble("solarRadiationHigh"));
-            lon = String.valueOf(obs.getDouble("lon"));
-            lat = String.valueOf(obs.getDouble("lat"));
-            uv = String.valueOf(obs.getDouble("uvHigh"));
-            winddir = String.valueOf(obs.getDouble("winddirAvg"));
-            humidity = String.valueOf(obs.getDouble("humidityAvg"));
-            temp = String.valueOf(ObservationMetric.getDouble("tempAvg"));
-            heatIndex = String.valueOf(ObservationMetric.getDouble("heatindexAvg"));
-            dewpt = String.valueOf(ObservationMetric.getDouble("dewptAvg"));
-            windChill = String.valueOf(ObservationMetric.getDouble("windchillAvg"));
-            windSpeed = String.valueOf(ObservationMetric.getDouble("windspeedAvg"));
-            windGust = String.valueOf(ObservationMetric.getDouble("windgustAvg"));
-            pressureMax = String.valueOf(ObservationMetric.getDouble("pressureMax"));
-            pressureMin = String.valueOf(ObservationMetric.getDouble("pressureMin"));
-            pressureTrend = String.valueOf(ObservationMetric.getDouble("pressureTrend"));
-            precipRate = String.valueOf(ObservationMetric.getDouble("precipRate"));
-            precipTotal = String.valueOf(ObservationMetric.getDouble("precipTotal"));
+            try {
+                solarRadiation = String.valueOf(obs.getDouble("solarRadiationHigh"));
+            } catch (Exception e) {
+                solarRadiation = null;
+            }
+
+            try {
+                lon = String.valueOf(obs.getDouble("lon"));
+            } catch (Exception e) {
+                lon = null;
+            }
+
+            //solarRadiation = obs.getString("solarRadiationHigh");
+
+
+            try {
+                lat = String.valueOf(obs.getDouble("lat"));
+            } catch (Exception e) {
+                lat = null;
+            }
+
+            try {
+                uv = String.valueOf(obs.getDouble("uvHigh"));
+            } catch (Exception e) {
+                uv = null;
+            }
+
+            try {
+                winddir = String.valueOf(obs.getDouble("winddirAvg"));
+            } catch (Exception e) {
+                winddir = null;
+            }
+
+            try {
+                humidity = String.valueOf(obs.getDouble("humidityAvg"));
+            } catch (Exception e) {
+                humidity = null;
+            }
+
+            try {
+                temp = String.valueOf(ObservationMetric.getDouble("tempAvg"));
+            } catch (Exception e) {
+                temp = null;
+            }
+
+            try {
+                heatIndex = String.valueOf(ObservationMetric.getDouble("heatindexAvg"));
+            } catch (Exception e) {
+                heatIndex = null;
+            }
+
+            try {
+                dewpt = String.valueOf(ObservationMetric.getDouble("dewptAvg"));
+            } catch (Exception e) {
+                dewpt = null;
+            }
+
+            try {
+                windChill = String.valueOf(ObservationMetric.getDouble("windchillAvg"));
+            } catch (Exception e) {
+                windChill = null;
+            }
+
+            try {
+                windSpeed = String.valueOf(ObservationMetric.getDouble("windspeedAvg"));
+            } catch (Exception e) {
+                windSpeed = null;
+            }
+
+            try {
+                windGust = String.valueOf(ObservationMetric.getDouble("windgustAvg"));
+            } catch (Exception e) {
+                windGust = null;
+            }
+
+            try {
+                pressureMax = String.valueOf(ObservationMetric.getDouble("pressureMax"));
+            } catch (Exception e) {
+                pressureMax = null;
+            }
+
+            try {
+                pressureMin = String.valueOf(ObservationMetric.getDouble("pressureMin"));
+            } catch (Exception e) {
+                pressureMin = null;
+            }
+
+            try {
+                pressureTrend = String.valueOf(ObservationMetric.getDouble("pressureTrend"));
+            } catch (Exception e) {
+                pressureTrend = null;
+            }
+
+            try {
+                precipRate = String.valueOf(ObservationMetric.getDouble("precipRate"));
+            } catch (Exception e) {
+                precipRate = null;
+            }
+            ;
+            try {
+                precipTotal = String.valueOf(ObservationMetric.getDouble("precipTotal"));
+            } catch (Exception e) {
+                precipTotal = null;
+            }
             elev = "";
             dailyObservation = new PWS.DailyObservation(stationID, obsTimeUtc, obsTimeLocal, solarRadiation, lon, lat,
                     uv, winddir, humidity, temp, heatIndex, dewpt, windChill, windSpeed, windGust, pressureMax,
