@@ -37,13 +37,17 @@ public class ObsExporter {
 
     public void createCSVFile() throws IOException {
         try{
-        File file = new File("C:\\Dropbox\\PWS_DATA\\" + sTS + ".csv");
+            Boolean b = false;
+        File file = new File("C:\\Dropbox\\PWS_DATA\\5Minutes\\" + sTS + ".csv");
+        if (file.exists()){
+            b=true;
+        }
          FileWriter fw = new FileWriter(file, true);
             //FileWriter fw = new FileWriter("C:\\Dropbox\\PWS_DATA\\" + sTS + ".csv", true);
                 BufferedWriter writer = new BufferedWriter(fw);
                 //CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT);
             CSVPrinter csvPrinter;
-                if (!file.exists()){
+                if (!b){
                     csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT
                             .withHeader("StationID",
                                     "ObsTimeLocal",
