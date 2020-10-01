@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            String ApiKey = "5aeeb90c49f249c1aeb90c49f289c138";
+            String ApiKey = "c817b2f245834d0997b2f24583dd0976";
             String StationID = "ISANVI15";
             GetObservation RCO = new GetObservation(ApiKey, StationID);
             RCO.setApiKey(ApiKey);
