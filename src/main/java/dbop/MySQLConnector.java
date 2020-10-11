@@ -6,10 +6,18 @@ import java.sql.SQLException;
 
 public class MySQLConnector {
 
+    //Remote
+    /*
     static final String MYSQL_JDBC_DRIVER   = "com.mysql.jdbc.Driver";
     static final String MYSQL_DB_CONNECTION = "jdbc:mysql://66.45.250.213/momolosi_dca";
     static final String MYSQL_DB_USER       = "momolosi_dca";
     static final String MYSQL_DB_PASSWORD   = "Delco1978";
+*/
+    //Local spock connection
+    static final String MYSQL_JDBC_DRIVER   = "com.mysql.jdbc.Driver";
+    static final String MYSQL_DB_CONNECTION = "jdbc:mysql://localhost:8889/pws";
+    static final String MYSQL_DB_USER       = "pls";
+    static final String MYSQL_DB_PASSWORD   = "pws";
 
     public static Connection getMYSQLDBConnection() {
         Connection dbConnection = null;

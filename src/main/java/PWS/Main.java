@@ -26,27 +26,30 @@ public class Main {
 
             //get localdate per recupero storico
             LocalDate startDate = LocalDate.parse("2020-03-01");
-            LocalDate endDate = LocalDate.parse("2020-09-30");
+            LocalDate endDate = LocalDate.parse("2020-10-11");
 
             //System.out.println(convertLocalDateToString(startDate));
 
-            List<String> lista =  getDatesBetween(startDate,endDate);
-            for(int i=0;i<lista.size();i++){
+            List<String> lista = getDatesBetween(startDate, endDate);
+            for (int i = 0; i < lista.size(); i++) {
                 System.out.println(lista.get(i));
             }
 
 
             //Connessione MYSQL
-	          /*
-	            MySQLConnector msc = new MySQLConnector();
-	            Connection dcConn = MySQLConnector.getMYSQLDBConnection();
-	            System.out.println(dcConn.getClass());
-	           */
+            /*
+            MySQLConnector msc = new MySQLConnector();
+            Connection dcConn = MySQLConnector.getMYSQLDBConnection();
+            System.out.println(dcConn.getClass());
+            */
 
             //Recupero storico
-            RetrieveHistoricalObservation rho = new RetrieveHistoricalObservation(startDate,endDate,ApiKey,StationID);
+            RetrieveHistoricalObservation rho = new RetrieveHistoricalObservation(startDate, endDate, ApiKey, StationID);
             rho.RetrieveHistoricalObservationFull();
             System.out.println("Recupero completato");
+
+
+
             /*
             //DAILY OBSERVATION
             try {

@@ -38,7 +38,7 @@ public class ObsExporter {
     public void createCSVFile() throws IOException {
         try{
             Boolean b = false;
-        File file = new File("C:\\Dropbox\\PWS_DATA\\5Minutes\\" + sTS + ".csv");
+            File file = new File("/Users/diego/Dropbox/PWS_DATA/Daily5MinutesCSV/" + sTS + ".csv");
         if (file.exists()){
             b=true;
         }

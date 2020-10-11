@@ -59,8 +59,8 @@ public class RetrieveHistoricalObservation {
 
     public void RetrieveHistoricalObservationFull() throws SQLException {
 
-        //MySQLConnector mySQLConn = new MySQLConnector();
-        //Connection connection = mySQLConn.getMYSQLDBConnection();
+        MySQLConnector mySQLConn = new MySQLConnector();
+        Connection connection = mySQLConn.getMYSQLDBConnection();
         try {
             List<String> listTS = getDatesBetween(startDate, endDate);
 
@@ -76,8 +76,8 @@ public class RetrieveHistoricalObservation {
                         DailyObservation observation = RCO.createDailyObservation(obs);
                         ObsExporter obsExporter = new ObsExporter(observation, listTS.get(i));
                         obsExporter.createCSVFile();
-                        //MySQLdbopDailyObs mysqldaily = new MySQLdbopDailyObs(connection, observation);
-                        //mysqldaily.addDailyObs();
+                        MySQLdbopDailyObs mysqldaily = new MySQLdbopDailyObs(connection, observation);
+                        mysqldaily.addDailyObs();
                     }
                     System.out.println("Recupero completato per " + listTS.get(i));
                 } catch (Exception e) {
